@@ -34,3 +34,31 @@ Sustainability increasingly matters in modern AWS workloads, as lower power usag
 
 
 <img width="705" height="626" alt="image" src="https://github.com/user-attachments/assets/5e39fce1-2fcd-458d-ba0e-4f3b8a1b7e32" />
+
+<H1>How this is used in the real world:</H1>
+
+The post illustrates an important performance optimization practice for AWS Lambda functions: tuning the allocated memory (which affects CPU power proportionally) to find a sweet spot between execution speed and cost. The images clearly show how changing Lambda memory impacts two core performance metrics, and we will use this to draw concrete conclusion and therefore decisions based on facts and pillars of WAR:
+
+<b>Key Visual Insights</b>
+The graph plots Lambda memory settings from 512 MB up to the maximum (1024 MB) on the X-axis.
+
+Execution time (latency) is tracked on the left Y-axis, shown as a downward curve. As memory increases, execution time sharply decreases, indicating better performance when more CPU/memory is allocated.
+
+Execution cost is plotted on the right Y-axis, showing a mostly flat line initially, then rising progressively at higher memory values. This reflects the AWS pricing model, where cost scales with memory allocation and duration.
+
+The sweet spot: Highlighted regions emphasize an ideal balance point (e.g., around 1024 MB or 256 MB in different graphs) where execution time is significantly reduced but cost hasn’t increased dramatically yet.
+
+Beyond this point, further memory increases reduce execution time only marginally but increase cost noticeably, suggesting diminished returns on investment.
+
+Reasoning and Conclusions Performance vs Cost Trade-Off: The post visually confirms that “more power means faster execution,” but not always lower cost. There is a non-linear relationship where doubling memory does not necessarily double cost, but can dramatically cut runtime, making it vital to measure both together.
+
+<b>Optimizing for Business Outcomes:</b>
+By systematically tuning Lambda memory and measuring cost vs performance, developers can optimize functions to meet desired SLAs(service-level agreements) while controlling cloud expense, contributing to pillars like Performance Efficiency and Cost Optimization.
+
+<b>Automation and Continuous Tuning:</b>
+The post implies and encourages infrastructure as code (like Terraform) and automated pipelines integrating Power Tuning tools to regularly find optimal configurations as workloads evolve.
+
+<b>Alignment with AWS Well-Architected Pillars:</b> 
+This exercise directly embodies the Performance Efficiency Pillar’s focus on using the right resource types and sizes, as well as the Cost Optimization Pillar’s emphasis on eliminating unnecessary costs, while adhering to Operational Excellence principles through automation.
+
+<img width="1047" height="628" alt="image" src="https://github.com/user-attachments/assets/52338080-b43e-4280-bba8-e0ae18fcb153" />
